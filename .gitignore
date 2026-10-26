@@ -1,0 +1,21 @@
+# Entorno y secretos
+.env
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Base de datos local y registros de los hooks
+*.db
+data/
+commit-log.txt
+push-log.txt
+
+# Editores / SO
+.vscode/
+.idea/
+.DS_Store
