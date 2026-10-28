@@ -1,0 +1,13 @@
+#!/bin/sh
+# Git no tiene un hook post-push nativo: este script lo lanza el alias 'git publish'
+# solo cuando 'git push' ha terminado bien.
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+COMMIT=$(git log -1 --pretty=format:'%h %s')
+
+echo "🚀 Cambios enviados correctamente al repositorio remoto."
+echo "   Rama:   $BRANCH"
+echo "   Commit: $COMMIT"
+echo "   Remoto: $(git remote get-url origin)"
+
+echo "$(date '+%d/%m/%Y %H:%M') | $BRANCH | $COMMIT" >> push-log.txt
+echo "📝 Push registrado en push-log.txt"

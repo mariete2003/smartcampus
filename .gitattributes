@@ -1,0 +1,4 @@
+# Los scripts de shell deben tener saltos de línea de Linux (LF) aunque se usen en Windows
+hooks/* text eol=lf
+*.sh text eol=lf
+Dockerfile text eol=lf

@@ -1,0 +1,21 @@
+#!/bin/sh
+echo "🔍 pre-commit: comprobando calidad del código con Ruff..."
+
+if ! python -m ruff check . ; then
+  echo "❌ Commit rechazado: Ruff ha encontrado errores"
+  exit 1
+fi
+
+if ! python -m ruff format --check . ; then
+  echo "❌ Commit rechazado: formato incorrecto (ejecuta 'python -m ruff format .')"
+  exit 1
+fi
+
+echo "🧪 pre-commit: ejecutando tests unitarios..."
+if ! python -m pytest tests/unit -q ; then
+  echo "❌ Commit rechazado: fallan los tests unitarios"
+  exit 1
+fi
+
+echo "✅ Calidad y tests unitarios OK"
+exit 0

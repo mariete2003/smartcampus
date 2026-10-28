@@ -1,0 +1,10 @@
+#!/bin/sh
+echo "🧪 pre-push: ejecutando tests unitarios y de integración..."
+
+if python -m pytest tests/unit tests/integration -q ; then
+  echo "✅ Todos los tests superados"
+  exit 0
+else
+  echo "❌ Push rechazado: existen tests fallidos"
+  exit 1
+fi
