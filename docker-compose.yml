@@ -1,0 +1,45 @@
+name: smartcampus-practica
+
+services:
+  backend:
+    build: .
+    image: smartcampus:latest
+    container_name: smartcampus-backend
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      APP_PORT: 8000
+      DB_PATH: /data/smartcampus.db
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    volumes:
+      - smartcampus-data:/data
+    networks:
+      - smartcampus-net
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  proxy:
+    image: nginx:1.27-alpine
+    container_name: smartcampus-proxy
+    ports:
+      - "${PROXY_PORT:-8080}:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - smartcampus-net
+    restart: unless-stopped
+
+volumes:
+  smartcampus-data:
+
+networks:
+  smartcampus-net:
+    driver: bridge

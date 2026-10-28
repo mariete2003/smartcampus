@@ -1,0 +1,12 @@
+#!/bin/sh
+LOG_FILE="commit-log.txt"
+
+{
+  echo "Autor: $(git log -1 --pretty=format:'%an <%ae>')"
+  echo "Hash: $(git log -1 --pretty=format:'%h')"
+  echo "Mensaje: $(git log -1 --pretty=format:'%s')"
+  echo "Fecha: $(git log -1 --date=format:'%d/%m/%Y %H:%M' --pretty=format:'%ad')"
+  echo "----------------------------------------"
+} >> "$LOG_FILE"
+
+echo "📝 Commit registrado en $LOG_FILE"
