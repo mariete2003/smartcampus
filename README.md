@@ -2,7 +2,7 @@
 
 Microservicio REST para **SmartCampus Solutions** que permite registrar aulas universitarias y gestionar sus reservas, impidiendo reservas solapadas. El proyecto automatiza calidad, tests, construcción de imágenes y despliegue con Git Hooks, Docker y GitHub Actions.
 
-**Equipo:** Mario González Baranda · Maisa · Jaime
+**Equipo:** Mario González Baranda · Jaime Moraleda · Jaime Nicolas Mas
 
 ## Arquitectura
 
